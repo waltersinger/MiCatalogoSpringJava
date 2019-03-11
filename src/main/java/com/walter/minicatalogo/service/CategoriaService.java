@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.walter.minicatalogo.entity.Categoria;
+import com.walter.minicatalogo.entity.Respuesta;
 import com.walter.minicatalogo.model.CategoriaRepository;
 
 @Service
@@ -30,8 +31,10 @@ public class CategoriaService {
 		return null;
 	}
 	
-	public void addCategory(Categoria c) {
-		categoriaRepository.save(c);
+	//public void addCategory(Categoria c) {
+	public Respuesta addCategory(Categoria c) {
+		Categoria categoria = categoriaRepository.save(c);
+		return new Respuesta(0,Integer.toString(categoria.getId()),"Categoría agregada correctamente" );
 	}
 	
 	public void updateCategory(Categoria c) {

@@ -1,6 +1,8 @@
 package com.walter.minicatalogo.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,17 +20,28 @@ public class ArticuloController {
 	@Autowired
 	private ArticuloService articuloService;
 	
-	//GET ALL 
+	//GET ALL (me devuelve un objeto json que contiene un array de objectos json
 	@RequestMapping("/articulos")
+	public Map<String,Object> articulos(){
+		HashMap<String, Object> map = new HashMap<>();
+	    //map.put("key1", "value1");
+	    map.put("articulos", articuloService.getItems());
+	    return map;
+	}
+/*	
+ * 	//Aqui solo me devuelve un array de objetos json
 	public List<Articulo> articulos(){
 		//obtiene todos los articulos
 		return articuloService.getItems();
-	}
+	}*/
+	
 	//GET A REG
 	@RequestMapping("/articulos/{id}")
 	public Articulo getItem(@PathVariable long id) {
 		return articuloService.getItem( id);
 	}
+	
+	
 	
 	//POST
 	@RequestMapping(method=RequestMethod.POST , value="/articulos")
