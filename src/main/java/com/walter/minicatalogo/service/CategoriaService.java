@@ -37,16 +37,22 @@ public class CategoriaService {
 		return new Respuesta(0,Integer.toString(categoria.getId()),"Categoría agregada correctamente" );
 	}
 	
-	public void updateCategory(Categoria c) {
-		categoriaRepository.save(c);
+//	public void updateCategory(Categoria c) {
+	public Respuesta updateCategory(Categoria c) {
+		Categoria categoria = categoriaRepository.save(c);
+		return new Respuesta(0,Integer.toString(categoria.getId()),"Se ha actualizado correctamente");
 	}
 	
-	public void deleteCategory(String c) {
+	//public void deleteCategory(String c) {
+	public Respuesta deleteCategory(String c) {
 		for(Categoria x: categoriaRepository.findAll()) {
-			if(x.getDescripcion().equals(c)) {
+			if(x.getNombre_categoria().equals(c)) {
 				categoriaRepository.delete(x);
-				break;
+				//break;
+				return new Respuesta(0,"-1","Se ha eliminado correctamente la categoría");
 			}
 		}
+		return new Respuesta(1,"-1","No se ha encontrado la categoría indicada");
+		
 	}
 }

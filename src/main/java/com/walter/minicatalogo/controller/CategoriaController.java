@@ -53,13 +53,24 @@ public class CategoriaController {
 	
 	//PUT
 	@RequestMapping(method= RequestMethod.PUT, value="/categorias")
-	public void updateCategory(@RequestBody Categoria c) {
+/*	public void updateCategory(@RequestBody Categoria c) {
 		categoriaService.updateCategory(c);
+	}*/
+	public HashMap<String,Object> updateCategory(@RequestBody Categoria c){
+		HashMap<String,Object> map = new HashMap<>();
+		map.put("Response",categoriaService.updateCategory(c));
+		return map;
 	}
 	
 	//DELETE 
-	@RequestMapping(method = RequestMethod.DELETE, value="/categorias/{c}")
-	public void deleteCategory(@PathVariable String c) {
-		categoriaService.deleteCategory(c);
+//	@RequestMapping(method = RequestMethod.DELETE, value="/categorias/{c}")
+//	public void deleteCategory(@PathVariable String c) {
+//		categoriaService.deleteCategory(c);
+//	}
+	@RequestMapping(method= RequestMethod.DELETE, value="/categorias/{c}")
+	public HashMap<String,Object> deleteCategory(@PathVariable String c){
+		HashMap<String,Object> map = new HashMap<>();
+		map.put("Response", categoriaService.deleteCategory(c));
+		return map;
 	}
 }
