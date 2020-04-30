@@ -19,7 +19,7 @@ public class Articulo {
 	private int id_categoria;
 	private double cantidad;
 	private int calificacion;
-	
+
 	public Articulo() {
 		
 	}
@@ -71,7 +71,7 @@ public class Articulo {
 	public void setId_categoria(int id_categoria) {
 		this.id_categoria = id_categoria;
 	}
-
+	
 	public double getCantidad() {
 		return cantidad;
 	}
@@ -88,6 +88,10 @@ public class Articulo {
 		this.calificacion = calificacion;
 	}
 	
+	@Override
+	public String toString() {
+		return getArticulo()+" "+getId()+" "+getDescripcion();
+	}
 	
 	
 }

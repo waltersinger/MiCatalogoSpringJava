@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.walter.minicatalogo.entity.Articulo;
+import com.walter.minicatalogo.model.ArticuloRepository;
 import com.walter.minicatalogo.service.ArticuloService;
 
 @RestController
@@ -36,12 +37,18 @@ public class ArticuloController {
 	}*/
 	
 	//GET A REG
-	@RequestMapping("/articulos/{id}")
+	@RequestMapping("/articulos/id/{id}")
 	public Articulo getItem(@PathVariable long id) {
 		return articuloService.getItem( id);
 	}
 	
-	
+	//GET REGISTROS DADO UN CRITERIO
+	@RequestMapping("/articulos/{unCriterio}")
+	public Map<String,Object> getItemsCriteria(@PathVariable String unCriterio) {
+		Map<String, Object> mapListArticulos = new HashMap<>();
+		mapListArticulos.put("articulos", articuloService.getItemsCriteria(unCriterio));
+		return mapListArticulos;
+	}
 	
 	//POST
 	@RequestMapping(method=RequestMethod.POST , value="/articulos")

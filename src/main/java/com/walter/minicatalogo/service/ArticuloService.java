@@ -36,4 +36,17 @@ public class ArticuloService {
 	public void deleteItem(long id) {
 		articuloRepository.deleteById(id);
 	}
+
+	public List<Articulo> getItemsCriteria(String unCriterio) {
+		List<Articulo> listArticulos= new ArrayList<>();
+		List<Articulo> listArtResults = new ArrayList<>();
+		articuloRepository.findAll().forEach(listArticulos::add);
+		for(Articulo unArticulo:listArticulos) {
+			if(unArticulo.toString().toUpperCase().indexOf(unCriterio.toUpperCase())>= 0) {
+				listArtResults.add(unArticulo);
+			}
+		}
+		
+		return listArtResults;
+	}
 }
