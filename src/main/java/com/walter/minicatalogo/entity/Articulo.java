@@ -1,9 +1,14 @@
 package com.walter.minicatalogo.entity;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -11,14 +16,29 @@ import javax.persistence.Table;
 public class Articulo {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@Column(name="articulo_id")
 	private long id;
+	private String codigo;
 	private String articulo;
 	private String imagen;
 	private String descripcion;
 	private double costo;
-	private int id_categoria;
+	
 	private double cantidad;
 	private int calificacion;
+
+	@ManyToOne
+	@JoinColumn(name="categoria_id")
+	private Categoria categoria;
+	
+	
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 
 	public Articulo() {
 		
@@ -63,7 +83,7 @@ public class Articulo {
 	public void setCosto(double costo) {
 		this.costo = costo;
 	}
-
+/*
 	public int getId_categoria() {
 		return id_categoria;
 	}
@@ -71,7 +91,7 @@ public class Articulo {
 	public void setId_categoria(int id_categoria) {
 		this.id_categoria = id_categoria;
 	}
-	
+	*/
 	public double getCantidad() {
 		return cantidad;
 	}
@@ -90,7 +110,15 @@ public class Articulo {
 	
 	@Override
 	public String toString() {
-		return getArticulo()+" "+getId()+" "+getDescripcion();
+		return getArticulo()+" "+getCodigo()+" "+getDescripcion();
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 	
 	

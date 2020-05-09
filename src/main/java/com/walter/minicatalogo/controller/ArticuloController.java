@@ -36,19 +36,28 @@ public class ArticuloController {
 		return articuloService.getItems();
 	}*/
 	
-	//GET A REG
-	@RequestMapping("/articulos/id/{id}")
-	public Articulo getItem(@PathVariable long id) {
-		return articuloService.getItem( id);
-	}
-	
 	//GET REGISTROS DADO UN CRITERIO
 	@RequestMapping("/articulos/{unCriterio}")
 	public Map<String,Object> getItemsCriteria(@PathVariable String unCriterio) {
+			Map<String, Object> mapListArticulos = new HashMap<>();
+			mapListArticulos.put("articulos", articuloService.getItemsCriteria(unCriterio));
+			return mapListArticulos;
+	}
+	
+	//GET Registro dado un codigo de articulo.
+	@RequestMapping("/articulos/codigo/{cod}")
+	public Articulo getItem(@PathVariable String cod) {
+		return articuloService.getItemByCode(cod);
+	}
+	//GET Registros de una categoria determinada
+	@RequestMapping("/categoria/{categ}/articulos")
+	public Map<String,Object> getCategoryItems(@PathVariable String categ){
 		Map<String, Object> mapListArticulos = new HashMap<>();
-		mapListArticulos.put("articulos", articuloService.getItemsCriteria(unCriterio));
+		mapListArticulos.put("articulos", articuloService.getArtsxCategoria(categ));
 		return mapListArticulos;
 	}
+
+	
 	
 	//POST
 	@RequestMapping(method=RequestMethod.POST , value="/articulos")

@@ -21,6 +21,7 @@ public class ArticuloService {
 		return l;
 	}
 	
+
 	public Articulo getItem(long id) {
 		return articuloRepository.findById(id).get();
 	}
@@ -39,14 +40,20 @@ public class ArticuloService {
 
 	public List<Articulo> getItemsCriteria(String unCriterio) {
 		List<Articulo> listArticulos= new ArrayList<>();
-		List<Articulo> listArtResults = new ArrayList<>();
-		articuloRepository.findAll().forEach(listArticulos::add);
-		for(Articulo unArticulo:listArticulos) {
-			if(unArticulo.toString().toUpperCase().indexOf(unCriterio.toUpperCase())>= 0) {
-				listArtResults.add(unArticulo);
-			}
-		}
-		
-		return listArtResults;
+		articuloRepository.findByArticuloContaining(unCriterio)
+		.forEach(listArticulos::add);
+		return listArticulos;
 	}
+
+	public Articulo getItemByCode(String cod) {
+		return articuloRepository.findByCodigoIgnoreCase(cod);
+	}
+	
+	public List<Articulo> getArtsxCategoria(String categ) {
+		List<Articulo> listArticulos = new ArrayList<>();
+		articuloRepository.findByCategoriaNombreIgnoreCase(categ)
+		.forEach(listArticulos::add);
+		return listArticulos;
+	}
+
 }

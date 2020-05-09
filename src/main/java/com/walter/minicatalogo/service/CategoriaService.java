@@ -34,19 +34,19 @@ public class CategoriaService {
 	//public void addCategory(Categoria c) {
 	public Respuesta addCategory(Categoria c) {
 		Categoria categoria = categoriaRepository.save(c);
-		return new Respuesta(0,Integer.toString(categoria.getId()),"Categoría agregada correctamente" );
+		return new Respuesta(0,Integer.toString(categoria.getCategoria_id()),"Categoría agregada correctamente" );
 	}
 	
 //	public void updateCategory(Categoria c) {
 	public Respuesta updateCategory(Categoria c) {
 		Categoria categoria = categoriaRepository.save(c);
-		return new Respuesta(0,Integer.toString(categoria.getId()),"Se ha actualizado correctamente");
+		return new Respuesta(0,Integer.toString(categoria.getCategoria_id()),"Se ha actualizado correctamente");
 	}
 	
 	//public void deleteCategory(String c) {
 	public Respuesta deleteCategory(String c) {
 		for(Categoria x: categoriaRepository.findAll()) {
-			if(x.getNombre_categoria().equals(c)) {
+			if(x.getNombre().equals(c)) {
 				categoriaRepository.delete(x);
 				//break;
 				return new Respuesta(0,"-1","Se ha eliminado correctamente la categoría");
